@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ContatosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +15,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('livros/');
 });
+
+
+Route::get('contatos/buscar',[ContatosController::class,'buscar']);
+
+Route::resource('contatos',ContatosController::class);
+
+
+Route::get('livros/buscar',[LivrosController::class,'buscar']);
+
+Route::resource('livros',LivrosController::class);
