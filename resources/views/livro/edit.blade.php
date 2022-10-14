@@ -1,7 +1,7 @@
 @extends('layout.app')
-@section('title','Alteração Livro {{$livro->nome}}')
+@section('title','Alteração Contato {{$livro->titulo}}')
 @section('content')
-    <h1>Alteração livro {{$livro->nome}}</h1>
+    <h1>Alteração Contato {{$livro->titulo}}</h1>
     @if(count($errors) > 0)
         <div class="alert alert-danger">
             <ul>
@@ -20,23 +20,18 @@
     @endif
     <br />
     {{Form::open(['route' => ['livros.update',$livro->id], 'method' => 'PUT'])}}
-    
         {{Form::label('titulo', 'Título')}}
-        {{Form::text('titulo',$livro->titulo,['class'=>'form-control','required','placeholder'=>'Título do livro'])}}
-
+        {{Form::text('titulo',$livro->titulo,['class'=>'form-control','required','placeholder'=>'Título do Livro'])}}
         {{Form::label('descricao', 'Descrição')}}
-        {{Form::text('descricao',$livro->descricao,['class'=>'form-control','required','placeholder'=>'Descrição'])}}
-
+        {{Form::textarea('descricao',$livro->descricao,['class'=>'form-control','required','placeholder'=>'Descrição'])}}
         {{Form::label('autor', 'Autor')}}
-        {{Form::text('autor',$livro->autor,['class'=>'form-control','required','placeholder'=>'Nome do(a) autor(a)'])}}
-
+        {{Form::text('autor',$livro->autor,['class'=>'form-control','required','placeholder'=>'Autor'])}}
         {{Form::label('editora', 'Editora')}}
-        {{Form::text('editora',$livro->editora,['class'=>'form-control','required','placeholder'=>'Nome da editora'])}}
-
+        {{Form::text('editora',$livro->editora,['class'=>'form-control','required','placeholder'=>'Editora'])}}
         {{Form::label('ano', 'Ano')}}
-        {{Form::text('ano',$livro->ano,['class'=>'form-control','required','placeholder'=>'Ano do lançamento'])}}
+        {{Form::number('ano',$livro->ano,['class'=>'form-control','required','placeholder'=>'Ano'])}}
         <br />
         {{Form::submit('Salvar',['class'=>'btn btn-success'])}}
-        <a href="{{url('livros')}}" class="btn btn-secondary">Voltar</a>
+        <a href="{{url('home')}}" class="btn btn-secondary">Voltar</a>
     {{Form::close()}}
 @endsection

@@ -1,17 +1,15 @@
 @extends('layout.app')
-@section('title','Livro - {{$livro->nome}}')
+@section('title','Contato - {{$livro->titulo}}')
 @section('content')
     <div class="card">
         <div class="card-header">
-            <h1>livro - {{$livro->nome}}</h1>
+            <h1>Livro - {{$livro->titulo}}</h1>
         </div>
         <div class="card-body">
                 <h3 class="card-title">ID: {{$livro->id}}</h3>
-                <p class="text"><br/>
-                Título: {{$livro->titulo}}<br/>
-                Descrição: {{$livro->descricao}}<br/>
+                <p class="text">Descrição: {{$livro->descricao}}</p>
                 Autor: {{$livro->autor}}<br/>
-                Editora: {{$livro->editora}}<br/>
+                Aditora: {{$livro->editora}}<br/>
                 Ano: {{$livro->ano}}</p>
         </div>
         <div class="card-footer">

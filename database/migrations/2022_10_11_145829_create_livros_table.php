@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('livros', function (Blueprint $table) {
             $table->id();
-            $table->string('titulo');
+            $table->string('titulo', 200);
             $table->string('descricao');
-            $table->string('autor');
-            $table->string('editora');
+            $table->string('autor', 200);
+            $table->string('editora', 100);
             $table->string('ano');
             $table->timestamps();
         });

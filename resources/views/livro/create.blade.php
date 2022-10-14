@@ -1,7 +1,7 @@
 @extends('layout.app')
 @section('title','Criar novo Livro')
 @section('content')
-    <h1>Criar novo Livros</h1>
+    <h1>Criar novo Livro</h1>
     @if(count($errors) > 0)
         <div class="alert alert-danger">
             <ul>
@@ -15,20 +15,16 @@
     @endif
     <br />
     {{Form::open(['route' => 'livros.store', 'method' => 'POST'])}}
-    {{Form::label('titulo', 'Título')}}
-        {{Form::text('titulo',$livro->titulo,['class'=>'form-control','required','placeholder'=>'Título do livro'])}}
-
+        {{Form::label('titulo', 'Título')}}
+        {{Form::text('titulo','',['class'=>'form-control','required','placeholder'=>'Título do Livro'])}}
         {{Form::label('descricao', 'Descrição')}}
-        {{Form::text('descricao',$livro->descricao,['class'=>'form-control','required','placeholder'=>'Descrição'])}}
-
+        {{Form::textarea('descricao','',['class'=>'form-control','required','placeholder'=>'Descrição'])}}
         {{Form::label('autor', 'Autor')}}
-        {{Form::text('autor',$livro->autor,['class'=>'form-control','required','placeholder'=>'Nome do(a) autor(a)'])}}
-
+        {{Form::text('autor','',['class'=>'form-control','required','placeholder'=>'Autor'])}}
         {{Form::label('editora', 'Editora')}}
-        {{Form::text('editora',$livro->editora,['class'=>'form-control','required','placeholder'=>'Nome da editora'])}}
-
+        {{Form::text('editora','',['class'=>'form-control','required','placeholder'=>'Editora'])}}
         {{Form::label('ano', 'Ano')}}
-        {{Form::text('ano',$livro->ano,['class'=>'form-control','required','placeholder'=>'Ano do lançamento'])}}
+        {{Form::number('ano','',['class'=>'form-control','required','placeholder'=>'Ano'])}}
         <br />
         {{Form::submit('Salvar',['class'=>'btn btn-success'])}}
         {!!Form::button('Cancelar',['onclick'=>'javascript:history.go(-1)', 'class'=>'btn btn-secondary'])!!}

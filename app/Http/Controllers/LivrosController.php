@@ -25,7 +25,7 @@ class LivrosController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function buscar(Request $request) {
-        $livros = Livro::where('titulo','LIKE','%'.$request->input('busca').'%')->orwhere('email','LIKE','%'.$request->input('busca').'%')->get();
+        $livros = livro::where('titulo','LIKE','%'.$request->input('busca').'%')->orwhere('descricao','LIKE','%'.$request->input('busca').'%')->orwhere('autor','LIKE','%'.$request->input('busca').'%')->orwhere('editora','LIKE','%'.$request->input('busca').'%')->get();
         return view('livro.index',array('livros' => $livros,'busca'=>$request->input('busca')));
     }
 
@@ -49,18 +49,18 @@ class LivrosController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'titulo' => 'required|min:3]',
+            'titulo' => 'required|min:3',
             'descricao' => 'required',
             'autor' => 'required',
             'editora' => 'required',
             'ano' => 'required',
         ]);
-        $livro = new livro();
+        $livro = new Livro();
         $livro->titulo = $request->input('titulo');
-        $livro->email = $request->input('descricao');
-        $livro->telefone = $request->input('autor');
-        $livro->cidade = $request->input('editora');
-        $livro->estado = $request->input('ano');
+        $livro->descricao = $request->input('descricao');
+        $livro->autor = $request->input('autor');
+        $livro->editora = $request->input('editora');
+        $livro->ano = $request->input('ano');
         if($livro->save()) {
             return redirect('livros');
         }
@@ -99,24 +99,22 @@ class LivrosController extends Controller
      */
     public function update(Request $request, $id)
     {
-
         $this->validate($request,[
-            'titulo' => 'required|min:3]',
+            'titulo' => 'required|min:3',
             'descricao' => 'required',
             'autor' => 'required',
             'editora' => 'required',
             'ano' => 'required',
         ]);
-
         $livro = Livro::find($id);
         $livro->titulo = $request->input('titulo');
-        $livro->email = $request->input('descricao');
-        $livro->telefone = $request->input('autor');
-        $livro->cidade = $request->input('editora');
-        $livro->estado = $request->input('ano');
+        $livro->descricao = $request->input('descricao');
+        $livro->autor = $request->input('autor');
+        $livro->editora  = $request->input('editora');
+        $livro->ano = $request->input('ano');
         if($livro->save()) {
             Session::flash('mensagem','Livro alterado com sucesso');
-            return redirect()->back();
+            return redirect('livros');
         }
     }
 
@@ -130,7 +128,7 @@ class LivrosController extends Controller
     {
         $livro = Livro::find($id);
         $livro->delete();
-        Session::flash('mensagem','Livro excluído com Sucesso');
+        Session::flash('mensagem','Livro Excluído com Sucesso');
         return redirect(url('livros/'));
     }
 }

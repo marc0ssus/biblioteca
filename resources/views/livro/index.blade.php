@@ -31,7 +31,7 @@
         @foreach ($livros as $livro)
             <tr>
                 <td>
-                    <a href="{{url('livros/'.$livro->id)}}">{{$livro->nome}}</a>
+                    <a href="{{url('livros/'.$livro->id)}}">{{$livro->titulo}}</a>
                 </td>
             </tr>
         @endforeach
