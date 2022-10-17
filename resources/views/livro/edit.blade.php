@@ -19,7 +19,7 @@
         </div>
     @endif
     <br />
-    {{Form::open(['route' => ['livros.update',$livro->id], 'method' => 'PUT'])}}
+    {{Form::open(['route' => ['livros.update',$livro->id], 'method' => 'PUT','enctype'=>'multipart/form-data'])}}
         {{Form::label('titulo', 'Título')}}
         {{Form::text('titulo',$livro->titulo,['class'=>'form-control','required','placeholder'=>'Título do Livro'])}}
         {{Form::label('descricao', 'Descrição')}}
@@ -30,6 +30,8 @@
         {{Form::text('editora',$livro->editora,['class'=>'form-control','required','placeholder'=>'Editora'])}}
         {{Form::label('ano', 'Ano')}}
         {{Form::number('ano',$livro->ano,['class'=>'form-control','required','placeholder'=>'Ano'])}}
+        {{Form::label('foto', 'Foto')}}
+        {{Form::file('foto',['class'=>'form-control','id'=>'foto'])}}
         <br />
         {{Form::submit('Salvar',['class'=>'btn btn-success'])}}
         <a href="{{url('home')}}" class="btn btn-secondary">Voltar</a>

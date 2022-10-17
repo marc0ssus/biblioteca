@@ -1,7 +1,29 @@
 @extends('layout.app')
 @section('title','Contato - {{$livro->titulo}}')
+@section('title','Livro - '.$livro->titulo)
 @section('content')
     <div class="card">
+    <div class="card w-50">
+        @php
+            $nomeimagem = "";
+            if(file_exists("./img/livros/".md5($livro->id).".jpg")) {
+                $nomeimagem = "./img/livros/".md5($livro->id).".jpg";
+            } elseif (file_exists("./img/livros/".md5($livro->id).".png")) {
+                $nomeimagem = "./img/livros/".md5($livro->id).".jpg";
+            } elseif (file_exists("./img/livros/".md5($livro->id).".gif")) {
+                $nomeimagem =  "./img/livros/".md5($livro->id).".gif";
+            } elseif (file_exists("./img/livros/".md5($livro->id).".webp")) {
+                $nomeimagem = "./img/livros/".md5($livro->id).".webp";
+            } elseif (file_exists("./img/livros/".md5($livro->id).".jpeg")) {
+                $nomeimagem = "./img/livros/".md5($livro->id).".jpeg";
+            } else {
+                $nomeimagem = "./img/livros/livrosemfoto.webp";
+            }
+            //echo $nomeimagem;
+        @endphp
+
+        {{Html::image(asset($nomeimagem),'Foto de '.$livro->titulo,["class"=>"card-img-top thumbnail"])}}
+
         <div class="card-header">
             <h1>Livro - {{$livro->titulo}}</h1>
         </div>

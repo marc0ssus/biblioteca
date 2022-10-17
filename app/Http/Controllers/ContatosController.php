@@ -49,7 +49,7 @@ class ContatosController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'nome' => 'required|min:3]',
+            'nome' => 'required|min:3',
             'email' => 'required|e-mail',
             'telefone' => 'required',
             'cidade' => 'required',
@@ -62,6 +62,11 @@ class ContatosController extends Controller
         $contato->cidade = $request->input('cidade');
         $contato->estado = $request->input('estado');
         if($contato->save()) {
+            if($request->hasFile('foto')){
+                $imagem = $request->file('foto');
+                $nomearquivo = md5($contato->id).".".$imagem->getClientOriginalExtension();
+                $request->file('foto')->move(public_path('.\img\contatos'),'nomearquivo');
+            }
             return redirect('contatos');
         }
     }
@@ -101,7 +106,7 @@ class ContatosController extends Controller
     {
 
         $this->validate($request,[
-            'nome' => 'required|min:3]',
+            'nome' => 'required|min:3',
             'email' => 'required|e-mail|min:3',
             'telefone' => 'required',
             'cidade' => 'required',
@@ -109,6 +114,11 @@ class ContatosController extends Controller
         ]);
 
         $contato = Contato::find($id);
+        if($request->hasFile('foto')){
+            $imagem = $request->file('foto');
+            $nomearquivo = md5($contato->id).".".$imagem->getClientOriginalExtension();
+            $request->file('foto')->move(public_path('.\img\contatos'),$nomearquivo);
+        }
         $contato->nome = $request->input('nome');
         $contato->email = $request->input('email');
         $contato->telefone = $request->input('telefone');
